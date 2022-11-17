@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.29">
+<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\Application.java">
+</file>
+<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\model\UserDTO.java">
+<error line="7" column="14" severity="warning" message="Abbreviation in name &apos;UserDTO&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
+</file>
+<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\persistence\entity\User.java">
+<error line="6" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - javax.persistence.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
+</file>
+<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\persistence\repository\UserRepository.java">
+</file>
+<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\UserService.java">
+</file>
+<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\UserServiceImpl.java">
+<error line="22" severity="warning" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+</file>
+<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\ui\command\UserCommands.java">
+</file>
+<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\ui\configuration\PromptConfig.java">
+</file>
+</checkstyle>
