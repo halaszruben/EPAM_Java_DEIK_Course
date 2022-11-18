@@ -19,33 +19,30 @@ import java.util.Optional;
 public class MoviesCommands {
 
     private final MovieService movieService;
-
     private final UserService userService;
 
     @ShellMethodAvailability("isAvailable")
-    @ShellMethod(key = "create movie", value = "Creating a movie")
-    public MovieDTO createMovies(String movieTitle, String movieType, int movieLength) {
-        MovieDTO movieDTO = MovieDTO.builder()
-                .withMovieTitle(movieTitle)
-                .withMovieType(movieType)
-                .withMovieLength(movieLength)
-                .build();
-
-        movieService.createMovie(movieDTO);
-
-        return movieDTO;
-    }
-
-    @ShellMethodAvailability("isAvailable")
-    @ShellMethod(key = "update movie", value = "Admin user can update an already existing movie")
-    public void updateMovie(String movieTitle, String movieType, int movieLength) {
+    @ShellMethod(key = "create movie", value = "Admin user can create movie")
+    public void createMovies(String movieTitle, String movieType, Integer movieLength) {
         MovieDTO newMovie = MovieDTO.builder()
                 .withMovieTitle(movieTitle)
                 .withMovieType(movieType)
                 .withMovieLength(movieLength)
                 .build();
 
-        movieService.updateMovie(newMovie);
+        movieService.createMovie(newMovie);
+    }
+
+    @ShellMethodAvailability("isAvailable")
+    @ShellMethod(key = "update movie", value = "Admin user can update an already existing movie")
+    public void updateMovie(String movieTitle, String movieType, Integer movieLength) {
+        MovieDTO movieToUpdate = MovieDTO.builder()
+                .withMovieTitle(movieTitle)
+                .withMovieType(movieType)
+                .withMovieLength(movieLength)
+                .build();
+
+        movieService.updateMovie(movieToUpdate);
     }
 
     @ShellMethodAvailability("isAvailable")
@@ -81,7 +78,7 @@ public class MoviesCommands {
         if (user.isPresent() && user.get().getRole() == User.Role.ADMIN) {
             return Availability.available();
         } else
-            return Availability.unavailable("Only an Admin has the authority to create a Movie");
+            return Availability.unavailable("Only an Admin has the authority for these types of commands");
     }
 
 }

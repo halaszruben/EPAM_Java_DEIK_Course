@@ -22,6 +22,7 @@ public class MovieServiceImpl implements MovieService {
         Movie movie = new Movie(movieDTO.getMovieTitle(),
                 movieDTO.getMovieType(),
                 movieDTO.getMovieLength());
+
         movieRepository.save(movie);
     }
 
@@ -60,6 +61,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     private Optional<MovieDTO> convertEntityToDto(Optional<Movie> movie) {
-        return movie.isEmpty() ? Optional.empty() : Optional.of(convertEntityToDto(movie.get()));
+        return movie.isEmpty() ? Optional.empty()
+                : Optional.of(convertEntityToDto(movie.get()));
     }
 }

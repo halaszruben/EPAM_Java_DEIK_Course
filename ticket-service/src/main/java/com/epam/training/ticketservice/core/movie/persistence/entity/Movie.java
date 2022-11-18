@@ -22,9 +22,9 @@ public class Movie {
 
     private String movieType;
 
-    private int movieLength;
+    private Integer movieLength;
 
-    public Movie(String movieTitle, String movieType, int movieLength) {
+    public Movie(String movieTitle, String movieType, Integer movieLength) {
         this.movieTitle = movieTitle;
         this.movieType = movieType;
         this.movieLength = movieLength;
