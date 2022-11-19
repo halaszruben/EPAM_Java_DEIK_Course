@@ -42,12 +42,12 @@ public class ScreeningServiceImpl implements ScreeningService {
         var screeningsForRooms = getRoomScreenings(roomName);
 
         if (movieAttrExists.isPresent() && roomAttrExists.isPresent()) {
-            if (!dateTimeChecks.validScreeningIntervals(movieAttrExists.get().getMovieTitle(),
+            if (dateTimeChecks.validScreeningIntervals(movieAttrExists.get().getMovieTitle(),
                     screeningTime, screeningsForRooms)) {
                 return "There is an overlapping screening";
             }
 
-            if (!dateTimeChecks.thereAreEnoughMinutesBetweenScreenings(movieAttrExists.get().getMovieTitle(),
+            if (dateTimeChecks.thereAreEnoughMinutesBetweenScreenings(movieAttrExists.get().getMovieTitle(),
                     screeningTime, screeningsForRooms)) {
                 return "This would start in the break period after another screening in this room";
             }
@@ -98,25 +98,6 @@ public class ScreeningServiceImpl implements ScreeningService {
     private Optional<ScreeningDto> convertEntityToDto(Optional<Screening> screening) {
         return screening.isEmpty() ? Optional.empty()
                 : Optional.of(convertEntityToDto(screening.get()));
-    }
-
-    private Optional<Long> calculatingMinutesBetweenScreens(LocalDateTime screeningTimer, Integer movieId) {
-        Optional<Screening> screening = screeningRepository
-                .findScreeningByMovieIdEqualsAndScreeningStartTimer(movieId, screeningTimer);
-        Optional<Room> room = roomRepository.findById(screening.get().getRoomId());
-
-        if (room.isPresent()) {
-            return Optional.of(breakTime(screening.get().getScreeningStartTimer(), screeningTimer));
-        }
-
-        return Optional.empty();
-    }
-
-
-    private long breakTime(LocalDateTime fromDate, LocalDateTime toDate) {
-        long minutes = ChronoUnit.MINUTES.between(fromDate, toDate);
-
-        return minutes;
     }
 
     public List<ScreeningDto> getRoomScreenings(String roomName) {

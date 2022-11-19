@@ -11,9 +11,4 @@ public interface ScreeningRepository extends JpaRepository<Screening, Integer> {
     Optional<Screening> findScreeningByMovieIdAndRoomIdAndScreeningStartTimer(
             Integer movieId, Integer roomId, LocalDateTime screeningStartTimer);
 
-    Optional<Screening> findScreeningByMovieIdEqualsAndScreeningStartTimer(
-            Integer movieId, LocalDateTime screeningStartTimer);
-
-    Optional<Screening> findScreeningByMovieIdEqualsAndScreeningStartTimerIsGreaterThanEqual(
-            Integer movieId, LocalDateTime screeningStartTimer);
 }

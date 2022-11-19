@@ -29,12 +29,10 @@ public class ScreeningCommands {
 
     @ShellMethodAvailability("isAvailable")
     @ShellMethod(key = "create screening", value = "Admin user can create a screening")
-    public String createScreening(String movieName, String roomName, String screeningTime) {
+    public void createScreening(String movieName, String roomName, String screeningTime) {
         LocalDateTime localDateTime = DateTimeConverter.convertStringToLocalTime(screeningTime);
 
         screeningService.createScreening(movieName, roomName, localDateTime);
-
-        return "There were no problems";
     }
 
     private Availability isAvailable() {

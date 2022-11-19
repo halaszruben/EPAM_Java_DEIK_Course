@@ -96,3 +96,23 @@
 1668892694124:create movie asd asd 21
 1668892700362:create room asd 21 32
 1668892735520:create screening asd asd "2021-03-14 16:00"
+1668893196814:sign in privileged admin admin
+1668893203716:create movie asd asd 12 32
+1668893210535:create movie asd2 asd 21 23
+1668893217898:create room asd 23 12
+1668893252597:create screening asd asd "2021-03-14 16:00"
+1668893272117:create screening asd2 asd "2021-03-14 16:05"
+1668893339967:sign in admin admin
+1668893346865:sign in privileged admin admin
+1668893358955:create movie asd asd 25
+1668893366251:create room asd 21 32
+1668893374940:create movie asd2 ds 45
+1668893378134:list movies
+1668893420105:create screening asd asd "2021-03-14 16:00"
+1668893443517:create screening asd2 asd "2021-03-14 16:10"
+1668893481978:sign in privileged admin admin
+1668893489985:create movie asd asd 21
+1668893495580:create movie asd2 asd 13
+1668893502983:create room poseidon 213 12
+1668893527035:create screening asd poseidon "2021-03-14 16:00"
+1668893545185:create screening asd2 poseidon "2021-03-14 16:00"
