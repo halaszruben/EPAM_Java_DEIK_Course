@@ -46,3 +46,53 @@
 1668791926789:delete room rooom
 1668791939397:update room afrika 123 121
 1668791951950:list rooms
+1668847753503:sign in privileged admin admin
+1668847756251:sign out
+1668847784608:sign in privileged admin admin
+1668847786981:describe
+1668847790148:help
+1668847795577:describe account
+1668847800025:sign out
+1668847867858:describe account
+1668869652965:sign in privileged admin admin
+1668869656818:describe account
+1668869662076:create movie asd asd 12
+1668869665536:list movies
+1668869669931:delete movie asd
+1668869672685:list movies
+1668869681074:create room lafa 213 123
+1668869684533:list rooms
+1668869692442:delete room lafa
+1668869694894:list rooms
+1668869696783:exit
+1668874967007:sign in privileged admin admin
+1668874976193:create movie asd ds 10
+1668874984629:create room afrika 12 32
+1668874996732:list movies && list rooms
+1668875004036:help
+1668875010224:list rooms
+1668875016407:list movies
+1668875097290:create screening "asd" afrika "2021-03-14 16:00"
+1668875143876:create screening "asd" afrika "2021-03-14 11:00"
+1668875474923:stacktrace
+1668875761190:sign in privileged admin admin
+1668875766753:create movie asd ds 12
+1668875774721:create room asd 21 32
+1668875809667:create screening asd asd "2021-03-14 16:00"
+1668875828716:stacktrace
+1668876114097:sign in privileged admin admin
+1668876128210:create screening "Spirited Away" Pedersoli "2021-03-14 16:00"
+1668876150203:stacktrace
+1668883988108:sign in
+1668883994937:sign in privileged sad asd
+1668884002886:sign in privileged admin admin
+1668884007985:describe account
+1668892405359:sign in privileged admin admin
+1668892418947:create movie asd ds 12
+1668892425120:create room asd 21 32
+1668892463534:create screening asd asd "2021-03-14 16:00"
+1668892569163:stacktrace
+1668892682420:sign in privileged admin admin
+1668892694124:create movie asd asd 21
+1668892700362:create room asd 21 32
+1668892735520:create screening asd asd "2021-03-14 16:00"

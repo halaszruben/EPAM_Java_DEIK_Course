@@ -1,6 +1,6 @@
 package com.epam.training.ticketservice.core.room.service;
 
-import com.epam.training.ticketservice.core.room.model.RoomDTO;
+import com.epam.training.ticketservice.core.room.model.RoomDto;
 import com.epam.training.ticketservice.core.room.persistence.entity.Room;
 import com.epam.training.ticketservice.core.room.persistence.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,22 +18,22 @@ public class RoomServiceImpl implements RoomService {
     private final RoomRepository roomRepository;
 
     @Override
-    public void createRoom(RoomDTO roomDTO) {
-        Room room = new Room(roomDTO.getRoomName(),
-                roomDTO.getRoomRowOfChairs(),
-                roomDTO.getRoomChairPosts());
+    public void createRoom(RoomDto roomDto) {
+        Room room = new Room(roomDto.getRoomName(),
+                roomDto.getRoomRowOfChairs(),
+                roomDto.getRoomChairPosts());
 
         roomRepository.save(room);
     }
 
     @Override
-    public void updateRoom(RoomDTO roomDTO) {
-        Optional<Room> room = roomRepository.findRoomByRoomName(roomDTO.getRoomName());
+    public void updateRoom(RoomDto roomDto) {
+        Optional<Room> room = roomRepository.findRoomByRoomName(roomDto.getRoomName());
 
         if (room.isPresent()) {
             Room updatedRoom = room.get();
-            updatedRoom.setRoomRowOfChairs(roomDTO.getRoomRowOfChairs());
-            updatedRoom.setRoomChairPosts(roomDTO.getRoomChairPosts());
+            updatedRoom.setRoomRowOfChairs(roomDto.getRoomRowOfChairs());
+            updatedRoom.setRoomChairPosts(roomDto.getRoomChairPosts());
 
             roomRepository.save(updatedRoom);
         }
@@ -46,21 +46,21 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<RoomDTO> listRooms() {
+    public List<RoomDto> listRooms() {
         return roomRepository.findAll().stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    private RoomDTO convertEntityToDto(Room room) {
-        return RoomDTO.builder()
+    private RoomDto convertEntityToDto(Room room) {
+        return RoomDto.builder()
                 .withRoomName(room.getRoomName())
-                .roomRowOfChairs(room.getRoomRowOfChairs())
-                .roomChairPosts(room.getRoomChairPosts())
+                .withRoomRowOfChairs(room.getRoomRowOfChairs())
+                .withRoomChairPosts(room.getRoomChairPosts())
                 .build();
     }
 
-    private Optional<RoomDTO> convertEntityToDto(Optional<Room> room) {
+    private Optional<RoomDto> convertEntityToDto(Optional<Room> room) {
         return room.isEmpty() ? Optional.empty()
                 : Optional.of(convertEntityToDto(room.get()));
     }

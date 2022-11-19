@@ -3,11 +3,11 @@ package com.epam.training.ticketservice.core.room.model;
 import lombok.Value;
 
 @Value
-public class RoomDTO {
+public class RoomDto {
 
     private final String roomName;
-    private final int roomRowOfChairs;
-    private final int roomChairPosts;
+    private final Integer roomRowOfChairs;
+    private final Integer roomChairPosts;
 
     public static Builder builder() {
         return new Builder();
@@ -16,26 +16,26 @@ public class RoomDTO {
     public static class Builder {
 
         private String roomName;
-        private int roomRowOfChairs;
-        private int roomChairPosts;
+        private Integer roomRowOfChairs;
+        private Integer roomChairPosts;
 
         public Builder withRoomName(String roomName) {
             this.roomName = roomName;
             return this;
         }
 
-        public Builder roomRowOfChairs(int roomRowOfChairs) {
+        public Builder withRoomRowOfChairs(Integer roomRowOfChairs) {
             this.roomRowOfChairs = roomRowOfChairs;
             return this;
         }
 
-        public Builder roomChairPosts(int roomChairPosts) {
+        public Builder withRoomChairPosts(Integer roomChairPosts) {
             this.roomChairPosts = roomChairPosts;
             return this;
         }
 
-        public RoomDTO build() {
-            return new RoomDTO(roomName, roomRowOfChairs, roomChairPosts);
+        public RoomDto build() {
+            return new RoomDto(roomName, roomRowOfChairs, roomChairPosts);
         }
 
     }

@@ -3,11 +3,11 @@ package com.epam.training.ticketservice.core.movie.model;
 import lombok.Value;
 
 @Value
-public class MovieDTO {
+public class MovieDto {
 
     private final String movieTitle;
     private final String movieType;
-    private final int movieLength;
+    private final Integer movieLength;
 
     public static Builder builder() {
         return new Builder();
@@ -16,7 +16,7 @@ public class MovieDTO {
     public static class Builder {
         private String movieTitle;
         private String movieType;
-        private int movieLength;
+        private Integer movieLength;
 
         public Builder withMovieTitle(String movieTitle) {
             this.movieTitle = movieTitle;
@@ -28,13 +28,13 @@ public class MovieDTO {
             return this;
         }
 
-        public Builder withMovieLength(int movieLength) {
+        public Builder withMovieLength(Integer movieLength) {
             this.movieLength = movieLength;
             return this;
         }
 
-        public MovieDTO build(){
-            return new MovieDTO(movieTitle, movieType, movieLength);
+        public MovieDto build(){
+            return new MovieDto(movieTitle, movieType, movieLength);
         }
 
     }

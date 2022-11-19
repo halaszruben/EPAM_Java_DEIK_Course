@@ -31,7 +31,7 @@ public class UserCommands {
             return "In order to logout, first you need to be logged in";
         }
 
-        return "Nobody is logged in";
+        return "Successfully signed out";
     }
 
     @ShellMethod(key = "describe account", value = "Describing the Logged In User")

@@ -1,6 +1,6 @@
 package com.epam.training.ticketservice.ui.command;
 
-import com.epam.training.ticketservice.core.room.model.RoomDTO;
+import com.epam.training.ticketservice.core.room.model.RoomDto;
 import com.epam.training.ticketservice.core.room.service.RoomService;
 import com.epam.training.ticketservice.core.user.model.UserDTO;
 import com.epam.training.ticketservice.core.user.persistence.entity.User;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @ShellComponent
 @AllArgsConstructor
-public class RoomsCommands {
+public class RoomCommands {
 
     private final RoomService roomService;
     private final UserService userService;
@@ -25,10 +25,10 @@ public class RoomsCommands {
     @ShellMethodAvailability("isAvailable")
     @ShellMethod(key = "create room", value = "Admin user can create a room")
     public void createRoom(String roomName, Integer roomRowOfChairs, Integer roomChairPosts) {
-        RoomDTO newRoom = RoomDTO.builder()
+        RoomDto newRoom = RoomDto.builder()
                 .withRoomName(roomName)
-                .roomRowOfChairs(roomRowOfChairs)
-                .roomChairPosts(roomChairPosts)
+                .withRoomRowOfChairs(roomRowOfChairs)
+                .withRoomChairPosts(roomChairPosts)
                 .build();
 
         roomService.createRoom(newRoom);
@@ -37,10 +37,10 @@ public class RoomsCommands {
     @ShellMethodAvailability("isAvailable")
     @ShellMethod(key = "update room", value = "Admin user can update an already existing room")
     public void updateRoom(String roomName, Integer roomRowOfChairs, Integer roomChairPosts) {
-        RoomDTO roomToUpdate = RoomDTO.builder()
+        RoomDto roomToUpdate = RoomDto.builder()
                 .withRoomName(roomName)
-                .roomRowOfChairs(roomRowOfChairs)
-                .roomChairPosts(roomChairPosts)
+                .withRoomRowOfChairs(roomRowOfChairs)
+                .withRoomChairPosts(roomChairPosts)
                 .build();
 
         roomService.updateRoom(roomToUpdate);
@@ -54,14 +54,14 @@ public class RoomsCommands {
 
     @ShellMethod(key = "list rooms", value = "Listing all the rooms")
     public String listRooms() {
-        List<RoomDTO> everyRoom = roomService.listRooms();
+        List<RoomDto> everyRoom = roomService.listRooms();
 
         if (everyRoom.isEmpty()){
             return "There are no rooms at the moment";
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (RoomDTO room : everyRoom){
+        for (RoomDto room : everyRoom){
             stringBuilder.append("Room "
             + room.getRoomName()
             + " with "

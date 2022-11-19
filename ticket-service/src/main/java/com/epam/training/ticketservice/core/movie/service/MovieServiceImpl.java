@@ -1,6 +1,6 @@
 package com.epam.training.ticketservice.core.movie.service;
 
-import com.epam.training.ticketservice.core.movie.model.MovieDTO;
+import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.movie.persistence.entity.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,22 +18,22 @@ public class MovieServiceImpl implements MovieService {
     private final MovieRepository movieRepository;
 
     @Override
-    public void createMovie(MovieDTO movieDTO) {
-        Movie movie = new Movie(movieDTO.getMovieTitle(),
-                movieDTO.getMovieType(),
-                movieDTO.getMovieLength());
+    public void createMovie(MovieDto movieDto) {
+        Movie movie = new Movie(movieDto.getMovieTitle(),
+                movieDto.getMovieType(),
+                movieDto.getMovieLength());
 
         movieRepository.save(movie);
     }
 
     @Override
-    public void updateMovie(MovieDTO movieDTO) {
-        Optional<Movie> movie = movieRepository.findMovieByMovieTitle(movieDTO.getMovieTitle());
+    public void updateMovie(MovieDto movieDto) {
+        Optional<Movie> movie = movieRepository.findMovieByMovieTitle(movieDto.getMovieTitle());
 
         if (movie.isPresent()) {
             Movie updatedMovie = movie.get();
-            updatedMovie.setMovieType(movieDTO.getMovieType());
-            updatedMovie.setMovieLength(movieDTO.getMovieLength());
+            updatedMovie.setMovieType(movieDto.getMovieType());
+            updatedMovie.setMovieLength(movieDto.getMovieLength());
 
             movieRepository.save(updatedMovie);
         }
@@ -46,21 +46,34 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<MovieDTO> listMovies() {
+    public List<MovieDto> listMovies() {
         return movieRepository.findAll().stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 
-    private MovieDTO convertEntityToDto(Movie movie) {
-        return MovieDTO.builder()
+    @Override
+    public int lengthOfTheMovie(String movieName) {
+        Optional<MovieDto> movie = listMovies().stream()
+                .filter(movieDto -> movieDto.getMovieTitle().equals(movieName))
+                .findFirst();
+
+        if (movie.isEmpty()) {
+            return 0;
+        }
+
+        return movie.get().getMovieLength();
+    }
+
+    private MovieDto convertEntityToDto(Movie movie) {
+        return MovieDto.builder()
                 .withMovieTitle(movie.getMovieTitle())
                 .withMovieType(movie.getMovieType())
                 .withMovieLength(movie.getMovieLength())
                 .build();
     }
 
-    private Optional<MovieDTO> convertEntityToDto(Optional<Movie> movie) {
+    private Optional<MovieDto> convertEntityToDto(Optional<Movie> movie) {
         return movie.isEmpty() ? Optional.empty()
                 : Optional.of(convertEntityToDto(movie.get()));
     }

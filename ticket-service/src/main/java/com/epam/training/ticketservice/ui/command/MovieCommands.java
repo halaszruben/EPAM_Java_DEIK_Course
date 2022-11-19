@@ -1,6 +1,6 @@
 package com.epam.training.ticketservice.ui.command;
 
-import com.epam.training.ticketservice.core.movie.model.MovieDTO;
+import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.movie.service.MovieService;
 import com.epam.training.ticketservice.core.user.service.UserService;
 import com.epam.training.ticketservice.core.user.model.UserDTO;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @ShellComponent
 @AllArgsConstructor
-public class MoviesCommands {
+public class MovieCommands {
 
     private final MovieService movieService;
     private final UserService userService;
@@ -24,7 +24,7 @@ public class MoviesCommands {
     @ShellMethodAvailability("isAvailable")
     @ShellMethod(key = "create movie", value = "Admin user can create movie")
     public void createMovies(String movieTitle, String movieType, Integer movieLength) {
-        MovieDTO newMovie = MovieDTO.builder()
+        MovieDto newMovie = MovieDto.builder()
                 .withMovieTitle(movieTitle)
                 .withMovieType(movieType)
                 .withMovieLength(movieLength)
@@ -36,7 +36,7 @@ public class MoviesCommands {
     @ShellMethodAvailability("isAvailable")
     @ShellMethod(key = "update movie", value = "Admin user can update an already existing movie")
     public void updateMovie(String movieTitle, String movieType, Integer movieLength) {
-        MovieDTO movieToUpdate = MovieDTO.builder()
+        MovieDto movieToUpdate = MovieDto.builder()
                 .withMovieTitle(movieTitle)
                 .withMovieType(movieType)
                 .withMovieLength(movieLength)
@@ -53,14 +53,14 @@ public class MoviesCommands {
 
     @ShellMethod(key = "list movies", value = "Listing all the movies")
     public String listMovies() {
-        List<MovieDTO> everyMovie = movieService.listMovies();
+        List<MovieDto> everyMovie = movieService.listMovies();
 
         if (everyMovie.isEmpty()) {
             return "There are no movies at the moment";
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (MovieDTO movie : everyMovie) {
+        for (MovieDto movie : everyMovie) {
             stringBuilder.append(movie.getMovieTitle()
             + " ("
             + movie.getMovieType()

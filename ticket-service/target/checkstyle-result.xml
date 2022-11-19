@@ -1,22 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="8.29">
-<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\Application.java">
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\Application.java">
 </file>
-<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\model\UserDTO.java">
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\movie\model\MovieDTO.java">
+<error line="6" column="14" severity="warning" message="Abbreviation in name &apos;MovieDTO&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
+<error line="36" column="32" severity="warning" message="WhitespaceAround: &apos;{&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+</file>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\movie\persistence\entity\Movie.java">
+</file>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\movie\persistence\repository\MovieRepository.java">
+</file>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\movie\service\MovieService.java">
+<error line="9" column="31" severity="warning" message="Abbreviation in name &apos;movieDTO&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
+<error line="11" column="31" severity="warning" message="Abbreviation in name &apos;movieDTO&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
+</file>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\movie\service\MovieServiceImpl.java">
+<error line="21" column="38" severity="warning" message="Abbreviation in name &apos;movieDTO&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
+<error line="30" column="38" severity="warning" message="Abbreviation in name &apos;movieDTO&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
+</file>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\room\model\RoomDTO.java">
+<error line="6" column="14" severity="warning" message="Abbreviation in name &apos;RoomDTO&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
+</file>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\room\persistence\entity\Room.java">
+<error line="27" column="82" severity="warning" message="WhitespaceAround: &apos;{&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+</file>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\room\persistence\repository\RoomRepository.java">
+</file>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\room\service\RoomService.java">
+<error line="9" column="29" severity="warning" message="Abbreviation in name &apos;roomDTO&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
+<error line="11" column="29" severity="warning" message="Abbreviation in name &apos;roomDTO&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
+</file>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\room\service\RoomServiceImpl.java">
+<error line="21" column="36" severity="warning" message="Abbreviation in name &apos;roomDTO&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
+<error line="30" column="36" severity="warning" message="Abbreviation in name &apos;roomDTO&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
+</file>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\model\UserDTO.java">
 <error line="7" column="14" severity="warning" message="Abbreviation in name &apos;UserDTO&apos; must contain no more than &apos;2&apos; consecutive capital letters." source="com.puppycrawl.tools.checkstyle.checks.naming.AbbreviationAsWordInNameCheck"/>
 </file>
-<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\persistence\entity\User.java">
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\persistence\entity\User.java">
 <error line="6" severity="warning" message="Using the &apos;.*&apos; form of import should be avoided - javax.persistence.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
 </file>
-<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\persistence\repository\UserRepository.java">
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\persistence\repository\UserRepository.java">
 </file>
-<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\UserService.java">
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\service\UserService.java">
 </file>
-<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\UserServiceImpl.java">
-<error line="22" severity="warning" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\core\user\service\UserServiceImpl.java">
+<error line="21" severity="warning" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
 </file>
-<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\ui\command\UserCommands.java">
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\ui\command\MoviesCommands.java">
+<error line="65" severity="warning" message="&apos;method call&apos; child has incorrect indentation level 12, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="66" severity="warning" message="&apos;method call&apos; child has incorrect indentation level 12, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="67" severity="warning" message="&apos;method call&apos; child has incorrect indentation level 12, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="68" severity="warning" message="&apos;method call&apos; child has incorrect indentation level 12, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="69" severity="warning" message="&apos;method call&apos; child has incorrect indentation level 12, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="80" severity="warning" message="&apos;else&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
 </file>
-<file name="E:\5. Felev\EPAM Java\epam-deik-java-dev\final\ticket-service\src\main\java\com\epam\training\ticketservice\ui\configuration\PromptConfig.java">
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\ui\command\RoomsCommands.java">
+<error line="59" column="33" severity="warning" message="WhitespaceAround: &apos;{&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+<error line="64" column="39" severity="warning" message="WhitespaceAround: &apos;{&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+<error line="66" severity="warning" message="&apos;method call&apos; child has incorrect indentation level 12, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="67" severity="warning" message="&apos;method call&apos; child has incorrect indentation level 12, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="68" severity="warning" message="&apos;method call&apos; child has incorrect indentation level 12, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="69" severity="warning" message="&apos;method call&apos; child has incorrect indentation level 12, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="70" severity="warning" message="&apos;method call&apos; child has incorrect indentation level 12, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="71" severity="warning" message="&apos;method call&apos; child has incorrect indentation level 12, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="72" severity="warning" message="&apos;method call&apos; child has incorrect indentation level 12, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="73" severity="warning" message="&apos;method call&apos; child has incorrect indentation level 12, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="84" severity="warning" message="&apos;else&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+</file>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\ui\command\UserCommands.java">
+</file>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\ui\configuration\InMemoryDatabaseInitializer.java">
+</file>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\java\com\epam\training\ticketservice\ui\configuration\PromptConfig.java">
+</file>
+<file name="E:\5. Felev\EPAM Java\Java Project\EPAM_Java_DEIK_Course\ticket-service\src\main\resources\application.properties">
 </file>
 </checkstyle>

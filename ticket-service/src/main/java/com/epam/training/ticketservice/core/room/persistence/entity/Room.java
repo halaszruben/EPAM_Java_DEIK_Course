@@ -24,7 +24,7 @@ public class Room {
 
     private Integer roomChairPosts;
 
-    public Room(String roomName, Integer roomRowOfChairs, Integer roomChairPosts){
+    public Room(String roomName, Integer roomRowOfChairs, Integer roomChairPosts) {
         this.roomName = roomName;
         this.roomRowOfChairs = roomRowOfChairs;
         this.roomChairPosts = roomChairPosts;
