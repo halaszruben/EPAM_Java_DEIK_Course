@@ -116,3 +116,16 @@
 1668893502983:create room poseidon 213 12
 1668893527035:create screening asd poseidon "2021-03-14 16:00"
 1668893545185:create screening asd2 poseidon "2021-03-14 16:00"
+1668894598543:sign in privileged admin admin
+1668894603690:create movie asd ds 21
+1668894610167:create movie asd2 sda 12
+1668894625512:create room poseidon 21 32
+1668894655544:create screening asd poseidon "2021-03-14 16:00"
+1668894671997:create screening asd2 poseidon "2021-03-14 16:00"
+1668930073678:sign in privleged admin admin
+1668930086731:sign in privileged admin admin
+1668930102172:create movie asd1 ds 232
+1668930108278:create movie asd2 ds 213
+1668930114926:create room alfa 21 32
+1668930133420:create screening asd1 alfa "2021-03-14 16:00"
+1668930150063:create screening asd2 alfa "2021-03-14 16:05"

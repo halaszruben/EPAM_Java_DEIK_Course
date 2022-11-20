@@ -16,8 +16,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,17 +39,20 @@ public class ScreeningServiceImpl implements ScreeningService {
 
         var screeningsForRooms = getRoomScreenings(roomName);
 
-        if (movieAttrExists.isPresent() && roomAttrExists.isPresent()) {
-            if (dateTimeChecks.validScreeningIntervals(movieAttrExists.get().getMovieTitle(),
-                    screeningTime, screeningsForRooms)) {
-                return "There is an overlapping screening";
-            }
-
-            if (dateTimeChecks.thereAreEnoughMinutesBetweenScreenings(movieAttrExists.get().getMovieTitle(),
-                    screeningTime, screeningsForRooms)) {
-                return "This would start in the break period after another screening in this room";
-            }
+        if (movieAttrExists.isEmpty() || roomAttrExists.isEmpty()) {
+            return "One or both of the inputs are wrong";
         }
+
+        if (!dateTimeChecks.validScreeningIntervals(movieName,
+                screeningTime, screeningsForRooms)) {
+            return "There is an overlapping screening";
+        }
+
+        if (!dateTimeChecks.thereAreEnoughMinutesBetweenScreenings(roomName,
+                screeningTime, screeningsForRooms)) {
+            return "This would start in the break period after another screening in this room";
+        }
+
 
         Screening screening = new Screening(movieAttrExists.get().getId(),
                 roomAttrExists.get().getId(), screeningStartTimer);
