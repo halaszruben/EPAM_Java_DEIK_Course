@@ -33,7 +33,7 @@ public class MovieDto {
             return this;
         }
 
-        public MovieDto build(){
+        public MovieDto build() {
             return new MovieDto(movieTitle, movieType, movieLength);
         }
 

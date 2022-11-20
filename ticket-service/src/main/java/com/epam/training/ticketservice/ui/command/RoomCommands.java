@@ -56,21 +56,21 @@ public class RoomCommands {
     public String listRooms() {
         List<RoomDto> everyRoom = roomService.listRooms();
 
-        if (everyRoom.isEmpty()){
+        if (everyRoom.isEmpty()) {
             return "There are no rooms at the moment";
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-        for (RoomDto room : everyRoom){
+        for (RoomDto room : everyRoom) {
             stringBuilder.append("Room "
-            + room.getRoomName()
-            + " with "
-            + room.getRoomRowOfChairs() * room.getRoomChairPosts()
-            + " seats, "
-            + room.getRoomRowOfChairs()
-            + " rows and "
-            + room.getRoomChairPosts()
-            + " columns\n");
+                    + room.getRoomName()
+                    + " with "
+                    + room.getRoomRowOfChairs() * room.getRoomChairPosts()
+                    + " seats, "
+                    + room.getRoomRowOfChairs()
+                    + " rows and "
+                    + room.getRoomChairPosts()
+                    + " columns\n");
         }
 
         return stringBuilder.toString();

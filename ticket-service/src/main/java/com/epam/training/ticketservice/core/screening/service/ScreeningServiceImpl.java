@@ -9,7 +9,7 @@ import com.epam.training.ticketservice.core.room.persistence.repository.RoomRepo
 import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
 import com.epam.training.ticketservice.core.screening.persistence.entity.Screening;
 import com.epam.training.ticketservice.core.screening.persistence.repository.ScreeningRepository;
-import com.epam.training.ticketservice.core.screening.utils.DateTimeChecks;
+import com.epam.training.ticketservice.core.screening.utils.DateTimeChecker;
 import com.epam.training.ticketservice.core.screening.utils.DateTimeConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class ScreeningServiceImpl implements ScreeningService {
     private final ScreeningRepository screeningRepository;
     private final MovieRepository movieRepository;
     private final RoomRepository roomRepository;
-    private final DateTimeChecks dateTimeChecks;
+    private final DateTimeChecker dateTimeChecker;
 
 
     @Override
@@ -39,17 +39,27 @@ public class ScreeningServiceImpl implements ScreeningService {
 
         var screeningsForRooms = getRoomScreenings(roomName);
 
+        if (screeningsForRooms.isEmpty()) {
+            Screening screening = new Screening();
+            screening.setMovieId(movieAttrExists.get().getId());
+            screening.setRoomId(roomAttrExists.get().getId());
+            screening.setScreeningStartTimer(screeningStartTimer);
+            this.screeningRepository.save(screening);
+
+            return "The screening has been saved successfully";
+        }
+
         if (movieAttrExists.isEmpty() || roomAttrExists.isEmpty()) {
             return "One or both of the inputs are wrong";
         }
 
-        if (!dateTimeChecks.validScreeningIntervals(movieName,
-                screeningTime, screeningsForRooms)) {
+        if (!dateTimeChecker.validScreeningIntervals(movieName,
+                screeningTime, screeningsForRooms) && !screeningsForRooms.isEmpty()) {
             return "There is an overlapping screening";
         }
 
-        if (!dateTimeChecks.thereAreEnoughMinutesBetweenScreenings(roomName,
-                screeningTime, screeningsForRooms)) {
+        if (!dateTimeChecker.thereAreEnoughMinutesBetweenScreenings(roomName,
+                screeningTime, screeningsForRooms) && !screeningsForRooms.isEmpty()) {
             return "This would start in the break period after another screening in this room";
         }
 
@@ -59,16 +69,21 @@ public class ScreeningServiceImpl implements ScreeningService {
 
         screeningRepository.save(screening);
 
-        return screeningRepository.toString();
+        return "The screening has been saved successfully";
     }
 
 
     @Transactional
     @Override
-    public void deleteScreening(ScreeningDto screeningDto) {
-//        LocalDateTime dateOfScreening = screeningDto.getCurrentTime();
-//        screeningRepository.deleteScreeningByCurrentTime(screeningDto.getCurrentTime());
+    public void deleteScreening(String movieName, String roomName, LocalDateTime screeningTime) {
+        Optional<Movie> movieAttrExists = movieRepository.findMovieByMovieTitle(movieName);
+        Optional<Room> roomAttrExists = roomRepository.findRoomByRoomName(roomName);
 
+        screeningRepository.deleteScreeningByMovieIdAndRoomIdAndScreeningStartTimer(
+                movieAttrExists.get().getId(),
+                roomAttrExists.get().getId(),
+                screeningTime
+        );
     }
 
     @Override

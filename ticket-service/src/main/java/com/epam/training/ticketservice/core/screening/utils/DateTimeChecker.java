@@ -11,11 +11,9 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class DateTimeChecks {
+public class DateTimeChecker {
 
     private final MovieService movieService;
-
-    private final static int minimBrakeTime = 10;
 
     private boolean overlappingBetweenMovies(LocalDateTime startMovieOne, LocalDateTime endMovieOne, LocalDateTime startMovieTwo, LocalDateTime endMovieTwo) {
 
@@ -25,12 +23,11 @@ public class DateTimeChecks {
             return true;
         } else if (startMovieOne.isBefore(startMovieTwo) && endMovieOne.isAfter(endMovieTwo)) {
             return true;
-        } else if (startMovieOne.isAfter(startMovieTwo) && endMovieOne.isBefore(endMovieTwo)) {
-            return true;
-        } else return false;
+        } else return startMovieOne.isAfter(startMovieTwo) && endMovieOne.isBefore(endMovieTwo);
     }
 
     private boolean enoughMinutesBetweenBrakes(LocalDateTime startMovieOne, LocalDateTime endMovieOne, LocalDateTime startMovieTwo, LocalDateTime endMovieTwo) {
+        int minimBrakeTime = 10;
         if (startMovieOne.isBefore(startMovieTwo)
                 && endMovieOne.isBefore(startMovieTwo)
                 && breakTime(endMovieOne, startMovieTwo) <= minimBrakeTime) {
@@ -39,17 +36,11 @@ public class DateTimeChecks {
                 && endMovieTwo.isBefore(startMovieOne)
                 && breakTime(endMovieTwo, startMovieOne) <= minimBrakeTime) {
             return false;
-        } else if (endMovieOne.equals(startMovieTwo) || endMovieTwo.equals(startMovieOne)) {
-            return false;
-        }
-
-        return true;
+        } else return !endMovieOne.equals(startMovieTwo) && !endMovieTwo.equals(startMovieOne);
     }
 
     private long breakTime(LocalDateTime fromDate, LocalDateTime toDate) {
-        long minutes = ChronoUnit.MINUTES.between(fromDate, toDate);
-
-        return minutes;
+        return ChronoUnit.MINUTES.between(fromDate, toDate);
     }
 
     private LocalDateTime endOfTheScreening(String movieName, LocalDateTime movieStartTimer) {

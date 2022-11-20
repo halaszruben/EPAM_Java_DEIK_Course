@@ -2,9 +2,9 @@ package com.epam.training.ticketservice.ui.command;
 
 import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.movie.service.MovieService;
-import com.epam.training.ticketservice.core.user.service.UserService;
 import com.epam.training.ticketservice.core.user.model.UserDTO;
 import com.epam.training.ticketservice.core.user.persistence.entity.User;
+import com.epam.training.ticketservice.core.user.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
@@ -62,11 +62,11 @@ public class MovieCommands {
         StringBuilder stringBuilder = new StringBuilder();
         for (MovieDto movie : everyMovie) {
             stringBuilder.append(movie.getMovieTitle()
-            + " ("
-            + movie.getMovieType()
-            + ", "
-            + movie.getMovieLength()
-            + " minutes)\n");
+                    + " ("
+                    + movie.getMovieType()
+                    + ", "
+                    + movie.getMovieLength()
+                    + " minutes)\n");
         }
 
         return stringBuilder.toString();

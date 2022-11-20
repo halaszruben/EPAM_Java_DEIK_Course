@@ -1,13 +1,7 @@
 package com.epam.training.ticketservice.ui.command;
 
-import com.epam.training.ticketservice.core.movie.persistence.entity.Movie;
-import com.epam.training.ticketservice.core.movie.persistence.repository.MovieRepository;
-import com.epam.training.ticketservice.core.room.persistence.entity.Room;
-import com.epam.training.ticketservice.core.room.persistence.repository.RoomRepository;
 import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
-import com.epam.training.ticketservice.core.screening.persistence.entity.Screening;
 import com.epam.training.ticketservice.core.screening.service.ScreeningService;
-import com.epam.training.ticketservice.core.screening.utils.DateTimeChecks;
 import com.epam.training.ticketservice.core.screening.utils.DateTimeConverter;
 import com.epam.training.ticketservice.core.user.model.UserDTO;
 import com.epam.training.ticketservice.core.user.persistence.entity.User;
@@ -19,6 +13,7 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @ShellComponent
@@ -29,10 +24,43 @@ public class ScreeningCommands {
 
     @ShellMethodAvailability("isAvailable")
     @ShellMethod(key = "create screening", value = "Admin user can create a screening")
-    public void createScreening(String movieName, String roomName, String screeningTime) {
+    public String createScreening(String movieName, String roomName, String screeningTime) {
         LocalDateTime localDateTime = DateTimeConverter.convertStringToLocalTime(screeningTime);
 
-        screeningService.createScreening(movieName, roomName, localDateTime);
+        return screeningService.createScreening(movieName, roomName, localDateTime);
+    }
+
+    @ShellMethodAvailability("isAvailable")
+    @ShellMethod(key = "delete screening", value = "Admin user can delete an already existing screening")
+    public void deleteScreening(String movieName, String roomName, String screeningTime) {
+        LocalDateTime time = DateTimeConverter.convertStringToLocalTime(screeningTime);
+        screeningService.deleteScreening(movieName, roomName, time);
+    }
+
+    @ShellMethod(key = "list screenings", value = "Listing all the screenings")
+    public String listScreenings() {
+        List<ScreeningDto> everyScreening = screeningService.listScreenings();
+
+        if (everyScreening.isEmpty()) {
+            return "There are no screenings";
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < everyScreening.size(); ++i) {
+            stringBuilder.append(everyScreening.get(i).getMovieAttributes().getMovieTitle()
+                    + " ("
+                    + everyScreening.get(i).getMovieAttributes().getMovieType()
+                    + ", "
+                    + everyScreening.get(i).getMovieAttributes().getMovieLength()
+                    + " minutes), screened in room "
+                    + everyScreening.get(i).getRoomAttributes().getRoomName()
+                    + ", at "
+                    + everyScreening.get(i).getCurrentTime());
+        }
+
+        return stringBuilder.toString();
+
     }
 
     private Availability isAvailable() {

@@ -129,3 +129,67 @@
 1668930114926:create room alfa 21 32
 1668930133420:create screening asd1 alfa "2021-03-14 16:00"
 1668930150063:create screening asd2 alfa "2021-03-14 16:05"
+1668963296357:sign in privileged admin admin
+1668963305508:create movie film1 ds 32
+1668963313500:create movie film2 as 35
+1668963356820:create room prime 21 43
+1668963395518:create screening film1 prime "2021-04-13 16:00"
+1668963473422:create screening film2 prime "2021-04-13 16:05"
+1668964480313:sign in privileged admin admin
+1668969716650:create movie AK drama 60
+1668969725824:create movie Devil scifi 60
+1668969734726:create room nagy 10 5
+1668969759678:create screening AK nagy "2022-04-13 16:00"
+1668969786487:create screening Devil nagy "2022-04-13 16:10"
+1668969797354:create screening Devil nagy "2022-04-13 17:05"
+1668969802705:create screening Devil nagy "2022-04-13 17:10"
+1668969811581:create screening Devil nagy "2022-04-13 17:11"
+1668969902088:sign in privileged admin admin
+1668969914760:create movie AK drama 60
+1668969923029:create movie Devil scifi 60
+1668969935280:create room 10 5
+1668969942866:create room nagy 10 5
+1668969953545:create screening AK nagy "2022-04-13 16:00"
+1668969965144:create screening Devil nagy "2022-04-13 16:10"
+1668969969701:create screening Devil nagy "2022-04-13 17:5"
+1668969977200:create screening Devil nagy "2022-04-13 17:05"
+1668969986362:create screening Devil nagy "2022-04-13 17:15"
+1668971484678:sign in admin admin
+1668971490892:sign in privileged admin admin
+1668971498709:create movie a dh 60
+1668971504250:create room b 21 23
+1668971525581:create screening a b "2021-05-14 16:00"
+1668971538190:delete screening a b "2021-05-14 16:00"
+1668971567428:stacktrace
+1668971624513:sign in privileged admin admin
+1668971633879:create movie a d 12
+1668971646635:create room b 43 12
+1668971654987:create screening a b "2021-05-14 16:00"
+1668971668261:delete screening a b "2021-05-14 16:00"
+1668971853402:sign in privileged admin admin
+1668971859078:create movie a b 23
+1668971865308:create room b 21 23
+1668971874244:create screening a b "2021-05-14 16:00"
+1668971880996:delete screening a b "2021-05-14 16:00"
+1668971930159:sing in privileged admin admin
+1668971940114:sign in privileged admin admin
+1668971946267:create movie asd sd 20
+1668971952902:create room prime 32 43
+1668971958718:create screening asd prime "2021-04-16 16:00"
+1668972565611:sign in privileged admin admin
+1668972568028:create movie asd sd 20
+1668972573895:create room prime 32 43
+1668972582291:create screening asd prime "2021-04-16 16:00"
+1668972617456:delete screening asd prime "2021-04-16 16:00"
+1668972871379:sign in privileged admin admin
+1668972880635:create movie asd sd 20
+1668972886686:create room prime 32 43
+1668972891628:create screening asd prime "2021-04-16 16:00"
+1668972899328:delete screening asd prime "2021-04-16 16:00"
+1668973723580:sing in privileged admin admin
+1668973729767:sign in privileged admin admin
+1668973733542:list screenings
+1668973745809:create movie asd sd 20
+1668973751428:create room prime 32 43
+1668973759792:create screening asd prime "2021-04-16 16:00"
+1668973763704:list screenings
