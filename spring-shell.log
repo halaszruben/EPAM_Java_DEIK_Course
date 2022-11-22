@@ -193,3 +193,15 @@
 1668973751428:create room prime 32 43
 1668973759792:create screening asd prime "2021-04-16 16:00"
 1668973763704:list screenings
+1668976044145:sign in privileged admin admin
+1668976053744:create movie asd sd 20
+1668976057763:create room prime 32 43
+1668976062171:create screening asd prime "2021-04-16 16:00"
+1668976065758:list screenings
+1668976074610:delete screening asd prime "2021-04-16 16:00"
+1668976078155:list screenings
+1669144053325:sign in privileged admin asd
+1669144058193:sign in privileged admin admin
+1669144064466:describe account
+1669144073683:sign out
+1669144083075:describe account

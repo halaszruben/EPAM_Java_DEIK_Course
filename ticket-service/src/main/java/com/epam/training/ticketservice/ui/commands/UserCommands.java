@@ -1,6 +1,6 @@
-package com.epam.training.ticketservice.ui.command;
+package com.epam.training.ticketservice.ui.commands;
 
-import com.epam.training.ticketservice.core.user.model.UserDTO;
+import com.epam.training.ticketservice.core.user.model.UserDto;
 import com.epam.training.ticketservice.core.user.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
@@ -16,7 +16,7 @@ public class UserCommands {
 
     @ShellMethod(key = "sign in privileged", value = "Admin User Login")
     public String login(String userName, String password) {
-        Optional<UserDTO> user = userService.singIn(userName, password);
+        Optional<UserDto> user = userService.singIn(userName, password);
         if (user.isEmpty()) {
             return "Login failed due to incorrect credentials";
         }
@@ -26,7 +26,7 @@ public class UserCommands {
 
     @ShellMethod(key = "sign out", value = "Any User Logout")
     public String logout() {
-        Optional<UserDTO> user = userService.singOut();
+        Optional<UserDto> user = userService.singOut();
         if (user.isEmpty()) {
             return "In order to logout, first you need to be logged in";
         }
@@ -36,7 +36,7 @@ public class UserCommands {
 
     @ShellMethod(key = "describe account", value = "Describing the Logged In User")
     public String describe() {
-        Optional<UserDTO> user = userService.describe();
+        Optional<UserDto> user = userService.describe();
         if (user.isEmpty()) {
             return "You are not signed in";
         }

@@ -1,0 +1,4 @@
+com\epam\training\ticketservice\ui\commands\RoomCommands.class
+com\epam\training\ticketservice\ui\commands\MovieCommands.class
+com\epam\training\ticketservice\ui\commands\UserCommands.class
+com\epam\training\ticketservice\ui\commands\ScreeningCommands.class

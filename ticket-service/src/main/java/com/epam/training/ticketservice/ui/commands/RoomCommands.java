@@ -1,8 +1,8 @@
-package com.epam.training.ticketservice.ui.command;
+package com.epam.training.ticketservice.ui.commands;
 
 import com.epam.training.ticketservice.core.room.model.RoomDto;
 import com.epam.training.ticketservice.core.room.service.RoomService;
-import com.epam.training.ticketservice.core.user.model.UserDTO;
+import com.epam.training.ticketservice.core.user.model.UserDto;
 import com.epam.training.ticketservice.core.user.persistence.entity.User;
 import com.epam.training.ticketservice.core.user.service.UserService;
 import lombok.AllArgsConstructor;
@@ -77,11 +77,12 @@ public class RoomCommands {
     }
 
     private Availability isAvailable() {
-        Optional<UserDTO> user = userService.describe();
+        Optional<UserDto> user = userService.describe();
 
         if (user.isPresent() && user.get().getRole() == User.Role.ADMIN) {
             return Availability.available();
-        } else
+        } else {
             return Availability.unavailable("Only an Admin has the authority for these types of commands");
+        }
     }
 }

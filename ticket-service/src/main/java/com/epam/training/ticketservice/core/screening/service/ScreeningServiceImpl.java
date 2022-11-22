@@ -28,6 +28,7 @@ public class ScreeningServiceImpl implements ScreeningService {
     private final MovieRepository movieRepository;
     private final RoomRepository roomRepository;
     private final DateTimeChecker dateTimeChecker;
+    private final DateTimeConverter dateTimeConverter;
 
 
     @Override
@@ -35,7 +36,7 @@ public class ScreeningServiceImpl implements ScreeningService {
         Optional<Movie> movieAttrExists = movieRepository.findMovieByMovieTitle(movieName);
         Optional<Room> roomAttrExists = roomRepository.findRoomByRoomName(roomName);
 
-        String screeningTime = DateTimeConverter.convertLocalTimeToString(screeningStartTimer);
+        String screeningTime = dateTimeConverter.convertLocalTimeToString(screeningStartTimer);
 
         var screeningsForRooms = getRoomScreenings(roomName);
 
@@ -58,7 +59,7 @@ public class ScreeningServiceImpl implements ScreeningService {
             return "There is an overlapping screening";
         }
 
-        if (!dateTimeChecker.thereAreEnoughMinutesBetweenScreenings(roomName,
+        if (!dateTimeChecker.enoughMinutesBetweenScreens(roomName,
                 screeningTime, screeningsForRooms) && !screeningsForRooms.isEmpty()) {
             return "This would start in the break period after another screening in this room";
         }

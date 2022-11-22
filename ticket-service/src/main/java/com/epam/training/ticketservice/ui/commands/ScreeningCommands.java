@@ -1,9 +1,9 @@
-package com.epam.training.ticketservice.ui.command;
+package com.epam.training.ticketservice.ui.commands;
 
 import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
 import com.epam.training.ticketservice.core.screening.service.ScreeningService;
 import com.epam.training.ticketservice.core.screening.utils.DateTimeConverter;
-import com.epam.training.ticketservice.core.user.model.UserDTO;
+import com.epam.training.ticketservice.core.user.model.UserDto;
 import com.epam.training.ticketservice.core.user.persistence.entity.User;
 import com.epam.training.ticketservice.core.user.service.UserService;
 import lombok.AllArgsConstructor;
@@ -21,11 +21,12 @@ import java.util.Optional;
 public class ScreeningCommands {
     private final UserService userService;
     private final ScreeningService screeningService;
+    private final DateTimeConverter dateTimeConverter;
 
     @ShellMethodAvailability("isAvailable")
     @ShellMethod(key = "create screening", value = "Admin user can create a screening")
     public String createScreening(String movieName, String roomName, String screeningTime) {
-        LocalDateTime localDateTime = DateTimeConverter.convertStringToLocalTime(screeningTime);
+        LocalDateTime localDateTime = dateTimeConverter.convertStringToLocalTime(screeningTime);
 
         return screeningService.createScreening(movieName, roomName, localDateTime);
     }
@@ -33,7 +34,7 @@ public class ScreeningCommands {
     @ShellMethodAvailability("isAvailable")
     @ShellMethod(key = "delete screening", value = "Admin user can delete an already existing screening")
     public void deleteScreening(String movieName, String roomName, String screeningTime) {
-        LocalDateTime time = DateTimeConverter.convertStringToLocalTime(screeningTime);
+        LocalDateTime time = dateTimeConverter.convertStringToLocalTime(screeningTime);
         screeningService.deleteScreening(movieName, roomName, time);
     }
 
@@ -64,12 +65,13 @@ public class ScreeningCommands {
     }
 
     private Availability isAvailable() {
-        Optional<UserDTO> user = userService.describe();
+        Optional<UserDto> user = userService.describe();
 
         if (user.isPresent() && user.get().getRole() == User.Role.ADMIN) {
             return Availability.available();
-        } else
+        } else {
             return Availability.unavailable("Only an Admin has the authority for these types of commands");
+        }
     }
 
 }

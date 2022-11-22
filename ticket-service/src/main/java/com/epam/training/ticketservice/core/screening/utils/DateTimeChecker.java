@@ -14,29 +14,35 @@ import java.util.List;
 public class DateTimeChecker {
 
     private final MovieService movieService;
+    private final DateTimeConverter dateTimeConverter;
 
-    private boolean overlappingBetweenMovies(LocalDateTime startMovieOne, LocalDateTime endMovieOne, LocalDateTime startMovieTwo, LocalDateTime endMovieTwo) {
+    private boolean overlapping(LocalDateTime st, LocalDateTime endSt, LocalDateTime nd, LocalDateTime endNd) {
 
-        if (startMovieOne.isBefore(startMovieTwo) && endMovieOne.isAfter(startMovieTwo)) {
+        if (st.isBefore(nd) && endSt.isAfter(nd)) {
             return true;
-        } else if (startMovieOne.isBefore(endMovieTwo) && endMovieOne.isAfter(endMovieTwo)) {
+        } else if (st.isBefore(endNd) && endSt.isAfter(endNd)) {
             return true;
-        } else if (startMovieOne.isBefore(startMovieTwo) && endMovieOne.isAfter(endMovieTwo)) {
+        } else if (st.isBefore(nd) && endSt.isAfter(endNd)) {
             return true;
-        } else return startMovieOne.isAfter(startMovieTwo) && endMovieOne.isBefore(endMovieTwo);
+        } else {
+            return st.isAfter(nd) && endSt.isBefore(endNd);
+        }
     }
 
-    private boolean enoughMinutesBetweenBrakes(LocalDateTime startMovieOne, LocalDateTime endMovieOne, LocalDateTime startMovieTwo, LocalDateTime endMovieTwo) {
+    private boolean enoughMinutesInBrake(LocalDateTime st, LocalDateTime endSt, LocalDateTime nd, LocalDateTime endNd) {
         int minimBrakeTime = 10;
-        if (startMovieOne.isBefore(startMovieTwo)
-                && endMovieOne.isBefore(startMovieTwo)
-                && breakTime(endMovieOne, startMovieTwo) <= minimBrakeTime) {
+        if (st.isBefore(nd)
+                && endSt.isBefore(nd)
+                && breakTime(endSt, nd) <= minimBrakeTime) {
             return false;
-        } else if (startMovieTwo.isBefore(startMovieOne)
-                && endMovieTwo.isBefore(startMovieOne)
-                && breakTime(endMovieTwo, startMovieOne) <= minimBrakeTime) {
+        } else if (nd.isBefore(st)
+                && endNd.isBefore(st)
+                && breakTime(endNd, st) <= minimBrakeTime) {
             return false;
-        } else return !endMovieOne.equals(startMovieTwo) && !endMovieTwo.equals(startMovieOne);
+        } else {
+            return !endSt.equals(nd)
+                    && !endNd.equals(st);
+        }
     }
 
     private long breakTime(LocalDateTime fromDate, LocalDateTime toDate) {
@@ -49,15 +55,16 @@ public class DateTimeChecker {
         return movieStartTimer.plusMinutes(movieLength);
     }
 
-    public boolean validScreeningIntervals(String movieName, String dateTime, List<ScreeningDto> currentScreeningsInRoom) {
-        LocalDateTime startOfNewScreen = DateTimeConverter.convertStringToLocalTime(dateTime);
+    public boolean validScreeningIntervals(String movieName, String dateTime, List<ScreeningDto> screenings) {
+        LocalDateTime startOfNewScreen = dateTimeConverter.convertStringToLocalTime(dateTime);
         LocalDateTime endOfNewScreen = endOfTheScreening(movieName, startOfNewScreen);
 
-        for (var screenings : currentScreeningsInRoom) {
-            LocalDateTime newScreenStart = screenings.getCurrentTime();
-            LocalDateTime newScreenEnd = endOfTheScreening(screenings.getMovieAttributes().getMovieTitle(), newScreenStart);
+        for (var screening : screenings) {
+            LocalDateTime newScreenStart = screening.getCurrentTime();
+            LocalDateTime newScreenEnd = endOfTheScreening(screening.getMovieAttributes().getMovieTitle(),
+                    newScreenStart);
 
-            if (!overlappingBetweenMovies(startOfNewScreen, endOfNewScreen, newScreenStart, newScreenEnd)) {
+            if (!overlapping(startOfNewScreen, endOfNewScreen, newScreenStart, newScreenEnd)) {
                 return true;
             }
         }
@@ -65,16 +72,16 @@ public class DateTimeChecker {
         return false;
     }
 
-    public boolean thereAreEnoughMinutesBetweenScreenings(String movieName, String screeningTime
-            , List<ScreeningDto> currentScreeningsInRoom) {
-        LocalDateTime startOfNewScreen = DateTimeConverter.convertStringToLocalTime(screeningTime);
+    public boolean enoughMinutesBetweenScreens(String movieName, String screeningTime, List<ScreeningDto> screenings) {
+        LocalDateTime startOfNewScreen = dateTimeConverter.convertStringToLocalTime(screeningTime);
         LocalDateTime endOfNewScreen = endOfTheScreening(movieName, startOfNewScreen);
 
-        for (var screenings : currentScreeningsInRoom) {
-            LocalDateTime newScreenStart = screenings.getCurrentTime();
-            LocalDateTime newScreenEnd = endOfTheScreening(screenings.getMovieAttributes().getMovieTitle(), newScreenStart);
+        for (var screening : screenings) {
+            LocalDateTime newScreenStart = screening.getCurrentTime();
+            LocalDateTime newScreenEnd = endOfTheScreening(screening.getMovieAttributes().getMovieTitle(),
+                    newScreenStart);
 
-            if (!enoughMinutesBetweenBrakes(startOfNewScreen, endOfNewScreen, newScreenStart, newScreenEnd)) {
+            if (!enoughMinutesInBrake(startOfNewScreen, endOfNewScreen, newScreenStart, newScreenEnd)) {
                 return false;
             }
         }
