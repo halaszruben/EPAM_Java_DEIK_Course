@@ -57,7 +57,7 @@ public class ScreeningCommands {
                     + " minutes), screened in room "
                     + everyScreening.get(i).getRoomAttributes().getRoomName()
                     + ", at "
-                    + everyScreening.get(i).getCurrentTime());
+                    + dateTimeConverter.convertLocalTimeToString(everyScreening.get(i).getCurrentTime()));
         }
 
         return stringBuilder.toString();

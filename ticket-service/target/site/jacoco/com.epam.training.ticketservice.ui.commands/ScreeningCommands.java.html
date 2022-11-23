@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ScreeningCommands.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ticket-service</a> &gt; <a href="index.source.html" class="el_package">com.epam.training.ticketservice.ui.commands</a> &gt; <span class="el_source">ScreeningCommands.java</span></div><h1>ScreeningCommands.java</h1><pre class="source lang-java linenums">package com.epam.training.ticketservice.ui.commands;
+
+import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
+import com.epam.training.ticketservice.core.screening.service.ScreeningService;
+import com.epam.training.ticketservice.core.screening.utils.DateTimeConverter;
+import com.epam.training.ticketservice.core.user.model.UserDto;
+import com.epam.training.ticketservice.core.user.persistence.entity.User;
+import com.epam.training.ticketservice.core.user.service.UserService;
+import lombok.AllArgsConstructor;
+import org.springframework.shell.Availability;
+import org.springframework.shell.standard.ShellComponent;
+import org.springframework.shell.standard.ShellMethod;
+import org.springframework.shell.standard.ShellMethodAvailability;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+@ShellComponent
+@AllArgsConstructor
+public class ScreeningCommands {
+    private final UserService userService;
+    private final ScreeningService screeningService;
+    private final DateTimeConverter dateTimeConverter;
+
+    @ShellMethodAvailability(&quot;isAvailable&quot;)
+    @ShellMethod(key = &quot;create screening&quot;, value = &quot;Admin user can create a screening&quot;)
+    public String createScreening(String movieName, String roomName, String screeningTime) {
+<span class="nc" id="L29">        LocalDateTime localDateTime = dateTimeConverter.convertStringToLocalTime(screeningTime);</span>
+
+<span class="nc" id="L31">        return screeningService.createScreening(movieName, roomName, localDateTime);</span>
+    }
+
+    @ShellMethodAvailability(&quot;isAvailable&quot;)
+    @ShellMethod(key = &quot;delete screening&quot;, value = &quot;Admin user can delete an already existing screening&quot;)
+    public void deleteScreening(String movieName, String roomName, String screeningTime) {
+<span class="nc" id="L37">        LocalDateTime time = dateTimeConverter.convertStringToLocalTime(screeningTime);</span>
+<span class="nc" id="L38">        screeningService.deleteScreening(movieName, roomName, time);</span>
+<span class="nc" id="L39">    }</span>
+
+    @ShellMethod(key = &quot;list screenings&quot;, value = &quot;Listing all the screenings&quot;)
+    public String listScreenings() {
+<span class="nc" id="L43">        List&lt;ScreeningDto&gt; everyScreening = screeningService.listScreenings();</span>
+
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (everyScreening.isEmpty()) {</span>
+<span class="nc" id="L46">            return &quot;There are no screenings&quot;;</span>
+        }
+
+<span class="nc" id="L49">        StringBuilder stringBuilder = new StringBuilder();</span>
+
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        for (int i = 0; i &lt; everyScreening.size(); ++i) {</span>
+<span class="nc" id="L52">            stringBuilder.append(everyScreening.get(i).getMovieAttributes().getMovieTitle()</span>
+                    + &quot; (&quot;
+<span class="nc" id="L54">                    + everyScreening.get(i).getMovieAttributes().getMovieType()</span>
+                    + &quot;, &quot;
+<span class="nc" id="L56">                    + everyScreening.get(i).getMovieAttributes().getMovieLength()</span>
+                    + &quot; minutes), screened in room &quot;
+<span class="nc" id="L58">                    + everyScreening.get(i).getRoomAttributes().getRoomName()</span>
+                    + &quot;, at &quot;
+<span class="nc" id="L60">                    + dateTimeConverter.convertLocalTimeToString(everyScreening.get(i).getCurrentTime()));</span>
+        }
+
+<span class="nc" id="L63">        return stringBuilder.toString();</span>
+
+    }
+
+    private Availability isAvailable() {
+<span class="nc" id="L68">        Optional&lt;UserDto&gt; user = userService.describe();</span>
+
+<span class="nc bnc" id="L70" title="All 4 branches missed.">        if (user.isPresent() &amp;&amp; user.get().getRole() == User.Role.ADMIN) {</span>
+<span class="nc" id="L71">            return Availability.available();</span>
+        } else {
+<span class="nc" id="L73">            return Availability.unavailable(&quot;Only an Admin has the authority for these types of commands&quot;);</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

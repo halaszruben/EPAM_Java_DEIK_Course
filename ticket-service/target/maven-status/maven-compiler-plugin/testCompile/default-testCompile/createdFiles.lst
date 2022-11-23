@@ -1,0 +1,4 @@
+com\epam\training\ticketservice\core\UserServiceImplTest.class
+com\epam\training\ticketservice\core\DateTimeConverterTest.class
+com\epam\training\ticketservice\core\MovieServiceImplTest.class
+com\epam\training\ticketservice\core\RoomServiceImplTest.class

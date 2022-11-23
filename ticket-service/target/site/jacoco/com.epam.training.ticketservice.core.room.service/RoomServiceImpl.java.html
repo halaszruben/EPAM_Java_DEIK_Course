@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RoomServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ticket-service</a> &gt; <a href="index.source.html" class="el_package">com.epam.training.ticketservice.core.room.service</a> &gt; <span class="el_source">RoomServiceImpl.java</span></div><h1>RoomServiceImpl.java</h1><pre class="source lang-java linenums">package com.epam.training.ticketservice.core.room.service;
+
+import com.epam.training.ticketservice.core.room.model.RoomDto;
+import com.epam.training.ticketservice.core.room.persistence.entity.Room;
+import com.epam.training.ticketservice.core.room.persistence.repository.RoomRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+public class RoomServiceImpl implements RoomService {
+
+    private final RoomRepository roomRepository;
+
+    @Override
+    public void createRoom(RoomDto roomDto) {
+<span class="fc" id="L22">        Room room = new Room(roomDto.getRoomName(),</span>
+<span class="fc" id="L23">                roomDto.getRoomRowOfChairs(),</span>
+<span class="fc" id="L24">                roomDto.getRoomChairPosts());</span>
+
+<span class="fc" id="L26">        roomRepository.save(room);</span>
+<span class="fc" id="L27">    }</span>
+
+    @Override
+    public void updateRoom(RoomDto roomDto) {
+<span class="fc" id="L31">        Optional&lt;Room&gt; room = roomRepository.findRoomByRoomName(roomDto.getRoomName());</span>
+
+<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        if (room.isPresent()) {</span>
+<span class="nc" id="L34">            Room updatedRoom = room.get();</span>
+<span class="nc" id="L35">            updatedRoom.setRoomRowOfChairs(roomDto.getRoomRowOfChairs());</span>
+<span class="nc" id="L36">            updatedRoom.setRoomChairPosts(roomDto.getRoomChairPosts());</span>
+
+<span class="nc" id="L38">            roomRepository.save(updatedRoom);</span>
+        }
+<span class="fc" id="L40">    }</span>
+
+    @Transactional
+    @Override
+    public void deleteMovie(String roomName) {
+<span class="nc" id="L45">        roomRepository.deleteRoomByRoomName(roomName);</span>
+<span class="nc" id="L46">    }</span>
+
+    @Override
+    public List&lt;RoomDto&gt; listRooms() {
+<span class="fc" id="L50">        return roomRepository.findAll().stream()</span>
+<span class="fc" id="L51">                .map(this::convertEntityToDto)</span>
+<span class="fc" id="L52">                .collect(Collectors.toList());</span>
+    }
+
+    private RoomDto convertEntityToDto(Room room) {
+<span class="fc" id="L56">        return RoomDto.builder()</span>
+<span class="fc" id="L57">                .withRoomName(room.getRoomName())</span>
+<span class="fc" id="L58">                .withRoomRowOfChairs(room.getRoomRowOfChairs())</span>
+<span class="fc" id="L59">                .withRoomChairPosts(room.getRoomChairPosts())</span>
+<span class="fc" id="L60">                .build();</span>
+    }
+
+    private Optional&lt;RoomDto&gt; convertEntityToDto(Optional&lt;Room&gt; room) {
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        return room.isEmpty() ? Optional.empty()</span>
+<span class="nc" id="L65">                : Optional.of(convertEntityToDto(room.get()));</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
