@@ -9,8 +9,7 @@ import com.epam.training.ticketservice.core.room.persistence.repository.RoomRepo
 import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
 import com.epam.training.ticketservice.core.screening.persistence.entity.Screening;
 import com.epam.training.ticketservice.core.screening.persistence.repository.ScreeningRepository;
-import com.epam.training.ticketservice.core.screening.utils.DateTimeChecker;
-import com.epam.training.ticketservice.core.screening.utils.DateTimeConverter;
+import com.github.mawippel.validator.OverlappingVerificator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +26,6 @@ public class ScreeningServiceImpl implements ScreeningService {
     private final ScreeningRepository screeningRepository;
     private final MovieRepository movieRepository;
     private final RoomRepository roomRepository;
-    private final DateTimeChecker dateTimeChecker;
-    private final DateTimeConverter dateTimeConverter;
 
 
     @Override
@@ -36,9 +33,28 @@ public class ScreeningServiceImpl implements ScreeningService {
         Optional<Movie> movieAttrExists = movieRepository.findMovieByMovieTitle(movieName);
         Optional<Room> roomAttrExists = roomRepository.findRoomByRoomName(roomName);
 
-        String screeningTime = dateTimeConverter.convertLocalTimeToString(screeningStartTimer);
-
         var screeningsForRooms = getRoomScreenings(roomName);
+
+        if (movieAttrExists.isEmpty() || roomAttrExists.isEmpty()) {
+            return "One or both of the inputs are wrong";
+        }
+
+        for (Screening screening : screeningRepository.findAll()) {
+            if (OverlappingVerificator.isOverlap(screeningStartTimer,
+                    screeningStartTimer.plusMinutes(movieAttrExists.get().getMovieLength()),
+                    screening.getScreeningStartTimer(),
+                    screening.getScreeningStartTimer().plusMinutes(
+                            movieRepository.findById(screening.getMovieId()).get().getMovieLength()))) {
+                return "There is an overlapping screening";
+            } else if (OverlappingVerificator.isOverlap(screeningStartTimer,
+                    screeningStartTimer.plusMinutes(movieAttrExists.get().getMovieLength() + 9),
+                    screening.getScreeningStartTimer(),
+                    screening.getScreeningStartTimer()
+                            .plusMinutes(movieRepository.findById(screening.getMovieId()).get().getMovieLength()
+                                    + 10))) {
+                return "This would start in the break period after another screening in this room";
+            }
+        }
 
         if (screeningsForRooms.isEmpty()) {
             Screening screening = new Screening();
@@ -49,21 +65,6 @@ public class ScreeningServiceImpl implements ScreeningService {
 
             return "The screening has been saved successfully";
         }
-
-        if (movieAttrExists.isEmpty() || roomAttrExists.isEmpty()) {
-            return "One or both of the inputs are wrong";
-        }
-
-        if (!dateTimeChecker.validScreeningIntervals(movieName,
-                screeningTime, screeningsForRooms) && !screeningsForRooms.isEmpty()) {
-            return "There is an overlapping screening";
-        }
-
-        if (!dateTimeChecker.enoughMinutesBetweenScreens(roomName,
-                screeningTime, screeningsForRooms) && !screeningsForRooms.isEmpty()) {
-            return "This would start in the break period after another screening in this room";
-        }
-
 
         Screening screening = new Screening(movieAttrExists.get().getId(),
                 roomAttrExists.get().getId(), screeningStartTimer);

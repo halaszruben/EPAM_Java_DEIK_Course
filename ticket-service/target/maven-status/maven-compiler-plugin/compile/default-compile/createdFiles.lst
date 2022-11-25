@@ -1,5 +1,4 @@
 com\epam\training\ticketservice\core\movie\persistence\entity\Movie.class
-com\epam\training\ticketservice\core\screening\utils\DateTimeChecker.class
 com\epam\training\ticketservice\core\user\persistence\entity\User$Role.class
 com\epam\training\ticketservice\ui\commands\RoomCommands.class
 com\epam\training\ticketservice\core\room\model\RoomDto.class

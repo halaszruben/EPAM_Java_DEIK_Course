@@ -9,8 +9,7 @@ import com.epam.training.ticketservice.core.room.persistence.repository.RoomRepo
 import com.epam.training.ticketservice.core.screening.model.ScreeningDto;
 import com.epam.training.ticketservice.core.screening.persistence.entity.Screening;
 import com.epam.training.ticketservice.core.screening.persistence.repository.ScreeningRepository;
-import com.epam.training.ticketservice.core.screening.utils.DateTimeChecker;
-import com.epam.training.ticketservice.core.screening.utils.DateTimeConverter;
+import com.github.mawippel.validator.OverlappingVerificator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,96 +26,98 @@ public class ScreeningServiceImpl implements ScreeningService {
     private final ScreeningRepository screeningRepository;
     private final MovieRepository movieRepository;
     private final RoomRepository roomRepository;
-    private final DateTimeChecker dateTimeChecker;
-    private final DateTimeConverter dateTimeConverter;
 
 
     @Override
     public String createScreening(String movieName, String roomName, LocalDateTime screeningStartTimer) {
-<span class="nc" id="L36">        Optional&lt;Movie&gt; movieAttrExists = movieRepository.findMovieByMovieTitle(movieName);</span>
-<span class="nc" id="L37">        Optional&lt;Room&gt; roomAttrExists = roomRepository.findRoomByRoomName(roomName);</span>
+<span class="nc" id="L33">        Optional&lt;Movie&gt; movieAttrExists = movieRepository.findMovieByMovieTitle(movieName);</span>
+<span class="nc" id="L34">        Optional&lt;Room&gt; roomAttrExists = roomRepository.findRoomByRoomName(roomName);</span>
 
-<span class="nc" id="L39">        String screeningTime = dateTimeConverter.convertLocalTimeToString(screeningStartTimer);</span>
+<span class="nc" id="L36">        var screeningsForRooms = getRoomScreenings(roomName);</span>
 
-<span class="nc" id="L41">        var screeningsForRooms = getRoomScreenings(roomName);</span>
-
-<span class="nc bnc" id="L43" title="All 2 branches missed.">        if (screeningsForRooms.isEmpty()) {</span>
-<span class="nc" id="L44">            Screening screening = new Screening();</span>
-<span class="nc" id="L45">            screening.setMovieId(movieAttrExists.get().getId());</span>
-<span class="nc" id="L46">            screening.setRoomId(roomAttrExists.get().getId());</span>
-<span class="nc" id="L47">            screening.setScreeningStartTimer(screeningStartTimer);</span>
-<span class="nc" id="L48">            this.screeningRepository.save(screening);</span>
-
-<span class="nc" id="L50">            return &quot;The screening has been saved successfully&quot;;</span>
+<span class="nc bnc" id="L38" title="All 4 branches missed.">        if (movieAttrExists.isEmpty() || roomAttrExists.isEmpty()) {</span>
+<span class="nc" id="L39">            return &quot;One or both of the inputs are wrong&quot;;</span>
         }
 
-<span class="nc bnc" id="L53" title="All 4 branches missed.">        if (movieAttrExists.isEmpty() || roomAttrExists.isEmpty()) {</span>
-<span class="nc" id="L54">            return &quot;One or both of the inputs are wrong&quot;;</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        for (Screening screening : screeningRepository.findAll()) {</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            if (OverlappingVerificator.isOverlap(screeningStartTimer,</span>
+<span class="nc" id="L44">                    screeningStartTimer.plusMinutes(movieAttrExists.get().getMovieLength()),</span>
+<span class="nc" id="L45">                    screening.getScreeningStartTimer(),</span>
+<span class="nc" id="L46">                    screening.getScreeningStartTimer().plusMinutes(</span>
+<span class="nc" id="L47">                            movieRepository.findById(screening.getMovieId()).get().getMovieLength()))) {</span>
+<span class="nc" id="L48">                return &quot;There is an overlapping screening&quot;;</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            } else if (OverlappingVerificator.isOverlap(screeningStartTimer,</span>
+<span class="nc" id="L50">                    screeningStartTimer.plusMinutes(movieAttrExists.get().getMovieLength() + 9),</span>
+<span class="nc" id="L51">                    screening.getScreeningStartTimer(),</span>
+<span class="nc" id="L52">                    screening.getScreeningStartTimer()</span>
+<span class="nc" id="L53">                            .plusMinutes(movieRepository.findById(screening.getMovieId()).get().getMovieLength()</span>
+                                    + 10))) {
+<span class="nc" id="L55">                return &quot;This would start in the break period after another screening in this room&quot;;</span>
+            }
+<span class="nc" id="L57">        }</span>
+
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (screeningsForRooms.isEmpty()) {</span>
+<span class="nc" id="L60">            Screening screening = new Screening();</span>
+<span class="nc" id="L61">            screening.setMovieId(movieAttrExists.get().getId());</span>
+<span class="nc" id="L62">            screening.setRoomId(roomAttrExists.get().getId());</span>
+<span class="nc" id="L63">            screening.setScreeningStartTimer(screeningStartTimer);</span>
+<span class="nc" id="L64">            this.screeningRepository.save(screening);</span>
+
+<span class="nc" id="L66">            return &quot;The screening has been saved successfully&quot;;</span>
         }
 
-<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (!dateTimeChecker.validScreeningIntervals(movieName,</span>
-<span class="nc bnc" id="L58" title="All 2 branches missed.">                screeningTime, screeningsForRooms) &amp;&amp; !screeningsForRooms.isEmpty()) {</span>
-<span class="nc" id="L59">            return &quot;There is an overlapping screening&quot;;</span>
-        }
+<span class="nc" id="L69">        Screening screening = new Screening(movieAttrExists.get().getId(),</span>
+<span class="nc" id="L70">                roomAttrExists.get().getId(), screeningStartTimer);</span>
 
-<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (!dateTimeChecker.enoughMinutesBetweenScreens(roomName,</span>
-<span class="nc bnc" id="L63" title="All 2 branches missed.">                screeningTime, screeningsForRooms) &amp;&amp; !screeningsForRooms.isEmpty()) {</span>
-<span class="nc" id="L64">            return &quot;This would start in the break period after another screening in this room&quot;;</span>
-        }
+<span class="nc" id="L72">        screeningRepository.save(screening);</span>
 
-
-<span class="nc" id="L68">        Screening screening = new Screening(movieAttrExists.get().getId(),</span>
-<span class="nc" id="L69">                roomAttrExists.get().getId(), screeningStartTimer);</span>
-
-<span class="nc" id="L71">        screeningRepository.save(screening);</span>
-
-<span class="nc" id="L73">        return &quot;The screening has been saved successfully&quot;;</span>
+<span class="nc" id="L74">        return &quot;The screening has been saved successfully&quot;;</span>
     }
 
 
     @Transactional
     @Override
     public void deleteScreening(String movieName, String roomName, LocalDateTime screeningTime) {
-<span class="nc" id="L80">        Optional&lt;Movie&gt; movieAttrExists = movieRepository.findMovieByMovieTitle(movieName);</span>
-<span class="nc" id="L81">        Optional&lt;Room&gt; roomAttrExists = roomRepository.findRoomByRoomName(roomName);</span>
+<span class="nc" id="L81">        Optional&lt;Movie&gt; movieAttrExists = movieRepository.findMovieByMovieTitle(movieName);</span>
+<span class="nc" id="L82">        Optional&lt;Room&gt; roomAttrExists = roomRepository.findRoomByRoomName(roomName);</span>
 
-<span class="nc" id="L83">        screeningRepository.deleteScreeningByMovieIdAndRoomIdAndScreeningStartTimer(</span>
-<span class="nc" id="L84">                movieAttrExists.get().getId(),</span>
-<span class="nc" id="L85">                roomAttrExists.get().getId(),</span>
+<span class="nc" id="L84">        screeningRepository.deleteScreeningByMovieIdAndRoomIdAndScreeningStartTimer(</span>
+<span class="nc" id="L85">                movieAttrExists.get().getId(),</span>
+<span class="nc" id="L86">                roomAttrExists.get().getId(),</span>
                 screeningTime
         );
-<span class="nc" id="L88">    }</span>
+<span class="nc" id="L89">    }</span>
 
     @Override
     public List&lt;ScreeningDto&gt; listScreenings() {
-<span class="nc" id="L92">        return screeningRepository.findAll().stream()</span>
-<span class="nc" id="L93">                .map(this::convertEntityToDto)</span>
-<span class="nc" id="L94">                .collect(Collectors.toList());</span>
+<span class="nc" id="L93">        return screeningRepository.findAll().stream()</span>
+<span class="nc" id="L94">                .map(this::convertEntityToDto)</span>
+<span class="nc" id="L95">                .collect(Collectors.toList());</span>
     }
 
     private ScreeningDto convertEntityToDto(Screening screening) {
-<span class="nc" id="L98">        Optional&lt;Movie&gt; movie = movieRepository.findById(screening.getMovieId());</span>
-<span class="nc" id="L99">        Optional&lt;Room&gt; room = roomRepository.findById(screening.getRoomId());</span>
+<span class="nc" id="L99">        Optional&lt;Movie&gt; movie = movieRepository.findById(screening.getMovieId());</span>
+<span class="nc" id="L100">        Optional&lt;Room&gt; room = roomRepository.findById(screening.getRoomId());</span>
 
-<span class="nc" id="L101">        MovieDto movieAttr = new MovieDto(movie.get().getMovieTitle(),</span>
-<span class="nc" id="L102">                movie.get().getMovieType(),</span>
-<span class="nc" id="L103">                movie.get().getMovieLength());</span>
-<span class="nc" id="L104">        RoomDto roomAttr = new RoomDto(room.get().getRoomName(),</span>
-<span class="nc" id="L105">                room.get().getRoomRowOfChairs(),</span>
-<span class="nc" id="L106">                room.get().getRoomChairPosts());</span>
+<span class="nc" id="L102">        MovieDto movieAttr = new MovieDto(movie.get().getMovieTitle(),</span>
+<span class="nc" id="L103">                movie.get().getMovieType(),</span>
+<span class="nc" id="L104">                movie.get().getMovieLength());</span>
+<span class="nc" id="L105">        RoomDto roomAttr = new RoomDto(room.get().getRoomName(),</span>
+<span class="nc" id="L106">                room.get().getRoomRowOfChairs(),</span>
+<span class="nc" id="L107">                room.get().getRoomChairPosts());</span>
 
-<span class="nc" id="L108">        return ScreeningDto.builder()</span>
-<span class="nc" id="L109">                .withMovieAttr(movieAttr)</span>
-<span class="nc" id="L110">                .withRoomAttr(roomAttr)</span>
-<span class="nc" id="L111">                .withCurrentTime(screening.getScreeningStartTimer())</span>
-<span class="nc" id="L112">                .build();</span>
+<span class="nc" id="L109">        return ScreeningDto.builder()</span>
+<span class="nc" id="L110">                .withMovieAttr(movieAttr)</span>
+<span class="nc" id="L111">                .withRoomAttr(roomAttr)</span>
+<span class="nc" id="L112">                .withCurrentTime(screening.getScreeningStartTimer())</span>
+<span class="nc" id="L113">                .build();</span>
     }
 
     public List&lt;ScreeningDto&gt; getRoomScreenings(String roomName) {
-<span class="nc" id="L116">        return this.listScreenings()</span>
-<span class="nc" id="L117">                .stream()</span>
-<span class="nc" id="L118">                .filter(screeningDTO -&gt; screeningDTO.getRoomAttributes().getRoomName().equals(roomName))</span>
-<span class="nc" id="L119">                .collect(Collectors.toList());</span>
+<span class="nc" id="L117">        return this.listScreenings()</span>
+<span class="nc" id="L118">                .stream()</span>
+<span class="nc" id="L119">                .filter(screeningDTO -&gt; screeningDTO.getRoomAttributes().getRoomName().equals(roomName))</span>
+<span class="nc" id="L120">                .collect(Collectors.toList());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
