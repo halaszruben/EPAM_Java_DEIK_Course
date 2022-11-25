@@ -205,3 +205,11 @@
 1669144064466:describe account
 1669144073683:sign out
 1669144083075:describe account
+1669382063018:sign in privileged admin admin
+1669382072559:create movie asd asd 12
+1669382076239:list movies
+1669382100490:update movies asd fd 12
+1669382111095:update movie asd fd 12
+1669382114301:list movies
+1669382119676:delete movie asd
+1669382123055:list movies

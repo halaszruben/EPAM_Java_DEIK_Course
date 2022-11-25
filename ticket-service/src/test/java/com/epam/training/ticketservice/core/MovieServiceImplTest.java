@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class MovieServiceImplTest {
@@ -52,12 +53,56 @@ public class MovieServiceImplTest {
     }
 
     @Test
+    void testUpdateMovieShouldUpdateTheMovieWhenListIsNotEmpty() {
+        //Given
+        Mockito.when(movieRepository.save(ENTITY)).thenReturn(ENTITY);
+        Mockito.when(movieRepository.findMovieByMovieTitle(ENTITY.getMovieTitle())).thenReturn(Optional.of(ENTITY));
+
+        //Mockito.when
+        underTesting.updateMovie(DTO);
+
+        //Then
+        Mockito.verify(movieRepository).findMovieByMovieTitle(ENTITY.getMovieTitle());
+        Mockito.verify(movieRepository).save(ENTITY);
+    }
+
+    @Test
     void testUpdateMovieShouldNotUpdateTheMovieWhenListIsEmpty() {
         //Given
         Mockito.when(movieRepository.save(ENTITY)).thenReturn(ENTITY);
 
         //Mockito.when, then
         underTesting.updateMovie(DTO);
+    }
+
+    @Test
+    void testDeleteMovieWhenMovieTitleIsGiven() {
+        //Given, When, Then
+        underTesting.deleteMovie(DTO.getMovieTitle());
+    }
+
+    @Test
+    void testLengthOfTheMovieShouldReturnNullWhenThereAreNoMovies() {
+        //Given, When
+        int actual = underTesting.lengthOfTheMovie(DTO.getMovieTitle());
+
+        //Then
+        Assertions.assertEquals(0, actual);
+    }
+
+    @Test
+    void testLengthOfTheMovieShouldReturnWithTheLengthOfTheMovieWhenThereIsAMovie() {
+        //Given
+        Mockito.when(movieRepository.findAll()).thenReturn(List.of(ENTITY));
+        List<MovieDto> listMovies = List.of(DTO);
+        int expected = listMovies.get(0).getMovieLength();
+
+        //Mockito.when
+        int actual = underTesting.lengthOfTheMovie(DTO.getMovieTitle());
+
+        //Then
+        Assertions.assertEquals(expected,actual);
+        Mockito.verify(movieRepository).findAll();
     }
 
 }

@@ -112,16 +112,10 @@ public class ScreeningServiceImpl implements ScreeningService {
                 .build();
     }
 
-    private Optional<ScreeningDto> convertEntityToDto(Optional<Screening> screening) {
-        return screening.isEmpty() ? Optional.empty()
-                : Optional.of(convertEntityToDto(screening.get()));
-    }
-
     public List<ScreeningDto> getRoomScreenings(String roomName) {
         return this.listScreenings()
                 .stream()
                 .filter(screeningDTO -> screeningDTO.getRoomAttributes().getRoomName().equals(roomName))
                 .collect(Collectors.toList());
     }
-
 }

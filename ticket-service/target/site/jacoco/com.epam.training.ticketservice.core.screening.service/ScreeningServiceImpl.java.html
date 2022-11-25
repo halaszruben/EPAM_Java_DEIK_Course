@@ -112,17 +112,11 @@ public class ScreeningServiceImpl implements ScreeningService {
 <span class="nc" id="L112">                .build();</span>
     }
 
-    private Optional&lt;ScreeningDto&gt; convertEntityToDto(Optional&lt;Screening&gt; screening) {
-<span class="nc bnc" id="L116" title="All 2 branches missed.">        return screening.isEmpty() ? Optional.empty()</span>
-<span class="nc" id="L117">                : Optional.of(convertEntityToDto(screening.get()));</span>
-    }
-
     public List&lt;ScreeningDto&gt; getRoomScreenings(String roomName) {
-<span class="nc" id="L121">        return this.listScreenings()</span>
-<span class="nc" id="L122">                .stream()</span>
-<span class="nc" id="L123">                .filter(screeningDTO -&gt; screeningDTO.getRoomAttributes().getRoomName().equals(roomName))</span>
-<span class="nc" id="L124">                .collect(Collectors.toList());</span>
+<span class="nc" id="L116">        return this.listScreenings()</span>
+<span class="nc" id="L117">                .stream()</span>
+<span class="nc" id="L118">                .filter(screeningDTO -&gt; screeningDTO.getRoomAttributes().getRoomName().equals(roomName))</span>
+<span class="nc" id="L119">                .collect(Collectors.toList());</span>
     }
-
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

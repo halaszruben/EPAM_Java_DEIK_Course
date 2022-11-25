@@ -72,9 +72,4 @@ public class MovieServiceImpl implements MovieService {
                 .withMovieLength(movie.getMovieLength())
                 .build();
     }
-
-    private Optional<MovieDto> convertEntityToDto(Optional<Movie> movie) {
-        return movie.isEmpty() ? Optional.empty()
-                : Optional.of(convertEntityToDto(movie.get()));
-    }
 }

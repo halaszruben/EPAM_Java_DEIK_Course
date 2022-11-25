@@ -10,7 +10,7 @@ public interface RoomService {
 
     void updateRoom(RoomDto roomDto);
 
-    void deleteMovie(String roomName);
+    void deleteRoom(String roomName);
 
     List<RoomDto> listRooms();
 }

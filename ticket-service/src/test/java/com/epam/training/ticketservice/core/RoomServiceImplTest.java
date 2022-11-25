@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.List;
+import java.util.Optional;
 
 public class RoomServiceImplTest {
 
@@ -49,6 +50,20 @@ public class RoomServiceImplTest {
     }
 
     @Test
+    void testUpdateRoomShouldUpdateTheRoomWhenListIsNotEmpty() {
+        //Given
+        Mockito.when(roomRepository.save(ENTITY)).thenReturn(ENTITY);
+        Mockito.when(roomRepository.findRoomByRoomName(ENTITY.getRoomName())).thenReturn(Optional.of(ENTITY));
+
+        //Mockito.when
+        underTesting.updateRoom(DTO);
+
+        //Then
+        Mockito.verify(roomRepository).findRoomByRoomName(ENTITY.getRoomName());
+        Mockito.verify(roomRepository).save(ENTITY);
+    }
+
+    @Test
     void testUpdateRoomShouldNotUpdateTheRoomWhenListIsEmpty() {
         //Given
         Mockito.when(roomRepository.save(ENTITY)).thenReturn(ENTITY);
@@ -57,4 +72,9 @@ public class RoomServiceImplTest {
         underTesting.updateRoom(DTO);
     }
 
+    @Test
+    void testDeleteRoomWhenRoomTitleIsGiven() {
+        //Given, When, Then
+        underTesting.deleteRoom(DTO.getRoomName());
+    }
 }

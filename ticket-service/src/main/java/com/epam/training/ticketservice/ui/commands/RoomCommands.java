@@ -49,7 +49,7 @@ public class RoomCommands {
     @ShellMethodAvailability("isAvailable")
     @ShellMethod(key = "delete room", value = "Admin user can delete an already existing room")
     public void deleteRoom(String roomName) {
-        roomService.deleteMovie(roomName);
+        roomService.deleteRoom(roomName);
     }
 
     @ShellMethod(key = "list rooms", value = "Listing all the rooms")

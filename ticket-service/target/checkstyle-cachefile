@@ -1,11 +1,11 @@
-#Wed Nov 23 22:28:47 EET 2022
+#Fri Nov 25 15:17:38 EET 2022
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\user\\model\\UserDto.java=1669141759939
-E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\ui\\commands\\RoomCommands.java=1669143040529
+E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\ui\\commands\\RoomCommands.java=1669373483050
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\room\\model\\RoomDto.java=1668861856022
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\ui\\configuration\\PromptConfig.java=1668974266070
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\ui\\commands\\UserCommands.java=1669143040540
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\movie\\persistence\\entity\\Movie.java=1668772602636
-E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\room\\service\\RoomServiceImpl.java=1668861856038
+E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\room\\service\\RoomServiceImpl.java=1669382187237
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\room\\persistence\\entity\\Room.java=1668850677788
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\screening\\service\\ScreeningService.java=1668972730488
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\resources\\application.properties=1669143897976
@@ -13,7 +13,7 @@ E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\user\\service\\UserServiceImpl.java=1669141896149
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\user\\service\\UserService.java=1669141759949
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\ui\\commands\\MovieCommands.java=1669143040535
-E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\movie\\service\\MovieServiceImpl.java=1668863272583
+E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\movie\\service\\MovieServiceImpl.java=1669382197497
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\ui\\commands\\ScreeningCommands.java=1669234685420
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\screening\\persistence\\repository\\ScreeningRepository.java=1668974266074
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\screening\\persistence\\entity\\Screening.java=1668887531618
@@ -21,8 +21,8 @@ configuration*?=A8E20037687B04C6C494AFE1C29D82A9A3B55AE4
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\room\\persistence\\repository\\RoomRepository.java=1668772870112
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\user\\persistence\\repository\\UserRepository.java=1668883972752
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\ui\\configuration\\InMemoryDatabaseInitializer.java=1668883972736
-E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\room\\service\\RoomService.java=1668861856017
-E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\screening\\service\\ScreeningServiceImpl.java=1669141593241
+E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\room\\service\\RoomService.java=1669373483033
+E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\screening\\service\\ScreeningServiceImpl.java=1669382248895
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\screening\\utils\\DateTimeConverter.java=1669141593229
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\movie\\persistence\\repository\\MovieRepository.java=1668709710806
 E\:\\5.\ Felev\\EPAM\ Java\\Java\ Project\\EPAM_Java_DEIK_Course\\ticket-service\\src\\main\\java\\com\\epam\\training\\ticketservice\\core\\screening\\model\\ScreeningDto.java=1668969101962

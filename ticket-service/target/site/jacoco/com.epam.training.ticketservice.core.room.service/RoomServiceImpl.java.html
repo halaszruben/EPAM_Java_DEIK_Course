@@ -30,20 +30,20 @@ public class RoomServiceImpl implements RoomService {
     public void updateRoom(RoomDto roomDto) {
 <span class="fc" id="L31">        Optional&lt;Room&gt; room = roomRepository.findRoomByRoomName(roomDto.getRoomName());</span>
 
-<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        if (room.isPresent()) {</span>
-<span class="nc" id="L34">            Room updatedRoom = room.get();</span>
-<span class="nc" id="L35">            updatedRoom.setRoomRowOfChairs(roomDto.getRoomRowOfChairs());</span>
-<span class="nc" id="L36">            updatedRoom.setRoomChairPosts(roomDto.getRoomChairPosts());</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (room.isPresent()) {</span>
+<span class="fc" id="L34">            Room updatedRoom = room.get();</span>
+<span class="fc" id="L35">            updatedRoom.setRoomRowOfChairs(roomDto.getRoomRowOfChairs());</span>
+<span class="fc" id="L36">            updatedRoom.setRoomChairPosts(roomDto.getRoomChairPosts());</span>
 
-<span class="nc" id="L38">            roomRepository.save(updatedRoom);</span>
+<span class="fc" id="L38">            roomRepository.save(updatedRoom);</span>
         }
 <span class="fc" id="L40">    }</span>
 
     @Transactional
     @Override
-    public void deleteMovie(String roomName) {
-<span class="nc" id="L45">        roomRepository.deleteRoomByRoomName(roomName);</span>
-<span class="nc" id="L46">    }</span>
+    public void deleteRoom(String roomName) {
+<span class="fc" id="L45">        roomRepository.deleteRoomByRoomName(roomName);</span>
+<span class="fc" id="L46">    }</span>
 
     @Override
     public List&lt;RoomDto&gt; listRooms() {
@@ -59,11 +59,5 @@ public class RoomServiceImpl implements RoomService {
 <span class="fc" id="L59">                .withRoomChairPosts(room.getRoomChairPosts())</span>
 <span class="fc" id="L60">                .build();</span>
     }
-
-    private Optional&lt;RoomDto&gt; convertEntityToDto(Optional&lt;Room&gt; room) {
-<span class="nc bnc" id="L64" title="All 2 branches missed.">        return room.isEmpty() ? Optional.empty()</span>
-<span class="nc" id="L65">                : Optional.of(convertEntityToDto(room.get()));</span>
-    }
-
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

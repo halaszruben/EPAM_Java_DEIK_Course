@@ -41,7 +41,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Transactional
     @Override
-    public void deleteMovie(String roomName) {
+    public void deleteRoom(String roomName) {
         roomRepository.deleteRoomByRoomName(roomName);
     }
 
@@ -59,10 +59,4 @@ public class RoomServiceImpl implements RoomService {
                 .withRoomChairPosts(room.getRoomChairPosts())
                 .build();
     }
-
-    private Optional<RoomDto> convertEntityToDto(Optional<Room> room) {
-        return room.isEmpty() ? Optional.empty()
-                : Optional.of(convertEntityToDto(room.get()));
-    }
-
 }
